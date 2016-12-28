@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 using Ink.Runtime;
 
 public class BasicInkExample : MonoBehaviour {
@@ -23,7 +24,8 @@ public class BasicInkExample : MonoBehaviour {
 
 	void StartStory () {
 		story = new Story (inkJSONAsset.text);
-		RefreshView();
+
+        RefreshView();
 	}
 
 	void RefreshView () {
