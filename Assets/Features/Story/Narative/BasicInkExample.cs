@@ -28,8 +28,6 @@ namespace Feature.Narative {
 
         void StartStory() {
             story = new Story(inkJSONAsset.text);
-
-
             //RefreshView();
         }
 
@@ -91,44 +89,74 @@ namespace Feature.Narative {
         [Header("Animation")]
         public TextDisplayAnimation textAnimation = new TextDisplayAnimation();
         
+		public ChoiceDisplayer choiceDisplayer;
+
         public void Update() {
             // Tick animation logic
             textAnimation.Tick(Time.deltaTime);
-
             // Input
-            if (Input.GetMouseButtonDown(0)) {
-                // Compleatly display text if was in the process of displaying it
-                if (!textAnimation.lastCharacterReached) {
-                    textAnimation.DisplayAll();
-                } else
-                // Continue storry
-                {
-                    if (story.canContinue) {
-                        // Continue story
-                        string text = story.Continue();
-                        text = text.TrimEnd('\r', '\n');
-                        // Start displaying this line
-                        textAnimation.Set(text);
-
-                        List<string> tagList = story.currentTags;
-                        foreach(var tag in tagList) {
-                            if (tag.StartsWith("actor")) {
-                                Debug.Log("ACTOR : #" + tag);
-                            } else {
-                                Debug.Log("#" + tag);
-                            }
-                        }
-                    } else {
-                        // Reset story
-                        story.ResetState();
-                        textAnimation.Set("Left click");
-                    }
-                }
+            if (Input.GetMouseButtonDown(0)) 
+			{
+				ContinueStory();
             }
-
             // Refresh animation material
             textAnimation.RefreshMaterial();
         }
+
+		public void ContinueStory()
+		{
+			// Compleatly display text if was in the process of displaying it
+			if (!textAnimation.lastCharacterReached) 
+			{
+				textAnimation.DisplayAll();
+			} else
+				// Continue storry
+			{
+				if (story.canContinue) 
+				{
+					// Continue story
+					string text = story.Continue();
+					text = text.TrimEnd('\r', '\n');
+					// Start displaying this line
+					textAnimation.Set(text);
+
+					List<string> tagList = story.currentTags;
+					foreach(var tag in tagList) 
+					{
+						if (tag.StartsWith("actor")) 
+						{
+							Debug.Log("ACTOR : #" + tag);
+						} 
+						else 
+						{
+							Debug.Log("#" + tag);
+						}
+					}
+
+					if(story.currentChoices.Count > 0)
+					{
+						choiceDisplayer.ClearChoices();
+						foreach(Choice c in story.currentChoices)
+						{
+							choiceDisplayer.DisplayChoice(c, OnChoiceChoosed);
+						}
+					}
+
+				} 
+				else if(story.currentChoices.Count <= 0) 
+				{
+					// Reset story
+					story.ResetState();
+					textAnimation.Set("Left click");
+				}
+			}
+		}
+
+		public void OnChoiceChoosed(Choice choice)
+		{
+			story.ChooseChoiceIndex(choice.index);
+			ContinueStory();
+		}
 
         [System.Serializable]
         public class TextDisplayAnimation {

@@ -1,5 +1,8 @@
 INCLUDE everydayChoices
 INCLUDE narativeFunctions
+INCLUDE ending
+INCLUDE mathStudy
+
 
 Hello world
 {ActorEnterScene("someActor", "someEntry")}
@@ -15,4 +18,7 @@ Force choices to always come after content - this was possible to get around pre
 * [Choice B] B
 * [Choice C] C
 - <> chosed.
+
+-> everydayChoices
+
 ->END

@@ -1,3 +1,41 @@
 === everydayChoices ===
-- 
+#everydayChoices
+Let's choose what to do today!
+
+* [everydayChoicesEnded] 
+~ Math = "both"
+- You've chosen what to do!
+
+-> morningStudies
+->DONE
+
+//School Subjects to be learned today.
+//State : notSelected, morning, afternoon, both.
+
+VAR	Math        = "notSelected"
+VAR	English     = "notSelected"
+VAR	Geography   = "notSelected"
+VAR	History     = "notSelected"
+VAR	Biology     = "notSelected"
+VAR	Physics     = "notSelected"
+VAR	Chemistry   = "notSelected"
+
+=== morningStudies ===
+{
+    - Math == "morning" || Math == "both" :
+        -> mathStudy ->
+    - else:
+        You did nothing this morning.
+}
+- The morning studies are done.
+->DONE
+
+=== afternoonStudies ===
+{
+    - Math == "afternoon" || Math == "both" :
+        -> mathStudy ->
+    - else:
+        You did nothing this afternoon.
+}
+- The afternoon studies are done.
 ->DONE
