@@ -1,0 +1,7 @@
+=== function ActorEnterScene(actor, entryType) ===
+    ~ return
+
+=== function ActorExitScene(actor, exitType) ===
+    ~ return
+    
+EXTERNAL ActorSpeaker(actor)
