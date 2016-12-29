@@ -40,11 +40,7 @@ namespace Feature.Narative
         /// </summary>
         public void ClearChoices() 
 		{
-			int childCount = choiceContainer.childCount;
-			for (int i = childCount - 1; i >= 0; --i) 
-			{
-				GameObject.Destroy(choiceContainer.GetChild(i).gameObject);
-			}
+            TransformUtility.DestroyAllChildrens(choiceContainer);
             gameObject.SetActive(false);
 		}
 			
