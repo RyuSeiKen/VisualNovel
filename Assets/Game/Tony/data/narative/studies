@@ -1,0 +1,32 @@
+=== studies ===
+
+= math(timeOfTheDay)
+You started studying math.
+You continued studying math.
+{~|||-> break ->}
+You stoped studying math.
+->->
+->DONE
+
+= physics(timeOfTheDay)
+You started studying physics.
+You continued studying physics.
+{~|||-> break ->}
+You stoped studying physics.
+->->
+->DONE
+
+= electronics(timeOfTheDay)
+You started studying electronics.
+You continued studying electronics.
+{~|||-> break ->}
+You stoped studying electronics.
+->->
+->DONE
+
+= break
+You though of taking {~a break|a small nap|a cup of tee|some snaks}.
++ [Take a break] You took a break.
++ [Dont]
+-
+->->

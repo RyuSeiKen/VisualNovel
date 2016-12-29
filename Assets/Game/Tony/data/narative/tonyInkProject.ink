@@ -1,13 +1,12 @@
-INCLUDE everydayChoices
 INCLUDE narativeFunctions
-INCLUDE ending
-INCLUDE mathStudy
 INCLUDE dailyChoices
 INCLUDE studies
 
-
 -> dailyChoices
 
+
+// Legacy
+/*
 Hello world
 {ActorEnterScene("someActor", "someEntry")}
 #tag1 #tag:2 #tag3
@@ -24,5 +23,5 @@ Make a choice :
 - <> chosed.
 
 -> dailyChoices
-
 ->END
+*/

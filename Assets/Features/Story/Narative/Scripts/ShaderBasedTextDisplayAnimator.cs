@@ -8,7 +8,7 @@ using Ink.Runtime;
 namespace Feature.Narative {
 
     [System.Serializable]
-    public class TextDisplayAnimator : MonoBehaviour {
+    public class ShaderBasedTextDisplayAnimator : MonoBehaviour, ITextDisplayAnimator {
 
         /// <summary>
         /// The text animation material with the tex text animation shader.
@@ -44,23 +44,55 @@ namespace Feature.Narative {
         [Range(-1, 1)]
         public float transitionOffset = -1;
 
-        public void Init(Material material, Text textUi) {
+
+
+        /*********
+         * UNITY *
+         *********/
+        private void Start() {
+            Init();
+        }
+
+        private void Update() {
+            Tick(Time.deltaTime);
+        }
+
+        private void OnRenderObject() {
+            RefreshMaterial();
+        }
+
+
+
+        /*********
+         * LOGIC *
+         *********/
+        private void Init(Material material, Text textUi) {
             this.material = material;
             this.textUi = textUi;
         }
 
-        public void Init() {
+        private void Init() {
             textUi.material = material;
         }
 
-        public void Set(string text) {
+        /// <summary>
+        /// The text that this animator will start to display from now on.
+        /// </summary>
+        public void SetTextToDisplay(string text) {
             // Set text on Text UI
             textUi.text = text;
             // Reset animation time
             time = 0;
         }
 
-        public void Tick(double dt) {
+        /// <summary>
+        /// Instantly finish the display animation so all the text is displayed.
+        /// </summary>
+        public void DisplayAllTextNow() {
+            time = double.PositiveInfinity;
+        }
+
+        private void Tick(double dt) {
             // Tick time
             time += dt * pixelPerSeconds * speedMultiplicator;
 
@@ -78,7 +110,7 @@ namespace Feature.Narative {
             lastCharacterReached = HasAnimationReachedLastCharacter();
         }
 
-        public void RefreshMaterial() {
+        private void RefreshMaterial() {
             // Set shader parameters on material
             material.SetFloat("_AnimationTime", (float)time);
             material.SetVector("_Canvas", textRect);
@@ -86,7 +118,7 @@ namespace Feature.Narative {
             material.SetFloat("_LineHightOffset", lineHightOffset);
         }
 
-        private bool HasAnimationReachedLastCharacter() {
+        public bool HasAnimationReachedLastCharacter() {
             // The animation has reached the last character if there is no character to display.
             if (string.IsNullOrEmpty(textUi.text)) return true;
 
@@ -109,6 +141,7 @@ namespace Feature.Narative {
             bool hasAnimationReachedPoint = HasAnimationReachedPoint(position);
 
             // Debug
+            #region
 #if UNITY_EDITOR
 #pragma warning disable 162
             const bool debug = true;
@@ -130,6 +163,7 @@ namespace Feature.Narative {
             }
 #pragma warning restore 162
 #endif
+            #endregion
 
             return hasAnimationReachedPoint;
         }
@@ -148,10 +182,6 @@ namespace Feature.Narative {
             float progress = (float)time - position;
             // Return progress without transition
             return progress > 0.5f;
-        }
-
-        public void DisplayAll() {
-            time = double.PositiveInfinity;
         }
 
     }

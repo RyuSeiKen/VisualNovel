@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace Feature.Narative {
-    public interface INarativeManagerrMock {
+    public interface INarativeManagerMock {
 
         /*********
          * ACTOR *

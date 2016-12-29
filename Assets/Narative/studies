@@ -1,0 +1,22 @@
+=== studies ===
+
+= math(timeOfTheDay)
+You started studying math.
+You continued studying math.
+You stoped studying math.
+->->
+->DONE
+
+= physics(timeOfTheDay)
+You started studying physics.
+You continued studying physics.
+You stoped studying physics.
+->->
+->DONE
+
+= electronics(timeOfTheDay)
+You started studying electronics.
+You continued studying electronics.
+You stoped studying electronics.
+->->
+->DONE

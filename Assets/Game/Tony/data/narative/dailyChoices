@@ -1,0 +1,89 @@
+// Time of the day
+VAR TIME_MORNING = "morning"
+VAR TIME_AFTERNOON = "afternoon"
+
+// Selectable subjects
+VAR SUBJECT_MATH        = "math"
+VAR SUBJECT_PHYSICS     = "physics"
+VAR SUBJECT_ELECTRONICS = "electronics"
+VAR SUBJECT_BIOLOGY     = "biology"
+
+// Selected subjects
+VAR SUBJECT_MORNING     = "none"
+VAR SUBJECT_AFTERNOON   = "none"
+
+=== dailyChoices ===
+This is a {~new|yet another|brand new|nice|great|funny|random} day four you !
+#waitForDailyChoiceValidation #skipChoice
+Let's chose what to do today !
++ [Validate subject study]
+
+- You guessed you'll do some <>
+{
+    - SUBJECT_MORNING == SUBJECT_MATH :
+        {~mind calcul|logic|probabilities}
+    - SUBJECT_MORNING == SUBJECT_PHYSICS :
+        {~astronomy|thermodynamics|fluid mechanics}
+    - SUBJECT_MORNING == SUBJECT_ELECTRONICS :
+        {~console flashing|boolean algebra|circuit welding}
+    - else:
+        ERROR
+}
+<> on the morning and some <>
+{
+    - SUBJECT_AFTERNOON == SUBJECT_MATH :
+        {~mind calcul|logic|probabilities}
+    - SUBJECT_AFTERNOON == SUBJECT_PHYSICS :
+        {~astronomy|thermodynamics|fluid mechanics}
+    - SUBJECT_AFTERNOON == SUBJECT_ELECTRONICS :
+        {~console flashing|boolean algebra|circuit welding}
+    - else:
+        ERROR
+}
+<> this afternoon.
+
+
+-> morningLesson ->
+-> afternoonLesson ->
+-> endOfTheDay ->
+-> DONE
+
+= morningLesson
+It's the morning.
+{
+    - SUBJECT_MORNING == SUBJECT_MATH :
+        You chose to study {SUBJECT_MATH} this morning.
+        -> studies.math(TIME_MORNING) ->
+    - SUBJECT_MORNING == SUBJECT_PHYSICS :
+        You chose to study {SUBJECT_PHYSICS} this morning.
+        -> studies.physics(TIME_MORNING) ->
+    - SUBJECT_MORNING == SUBJECT_ELECTRONICS :
+        You chose to study {SUBJECT_ELECTRONICS} this morning.
+        -> studies.electronics(TIME_MORNING) ->
+    - else:
+        ERROR : You did nothing this morning.
+}
+->->
+-> DONE
+
+= afternoonLesson
+It's the afternoon.
+{
+    - SUBJECT_AFTERNOON == SUBJECT_MATH :
+        You chose to study {SUBJECT_MATH} this morning.
+        -> studies.math(TIME_AFTERNOON) ->
+    - SUBJECT_AFTERNOON == SUBJECT_PHYSICS :
+        You chose to study {SUBJECT_PHYSICS} this morning.
+        -> studies.physics(TIME_AFTERNOON) ->
+    - SUBJECT_AFTERNOON == SUBJECT_ELECTRONICS :
+        You chose to study {SUBJECT_ELECTRONICS} this morning.
+        -> studies.electronics(TIME_AFTERNOON) ->
+    - else:
+        ERROR : You did nothing this afternoon.
+}
+->->
+-> DONE
+
+= endOfTheDay
+Your day ended without any incident.
+-> END
