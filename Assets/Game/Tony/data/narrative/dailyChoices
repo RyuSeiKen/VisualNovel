@@ -1,15 +1,11 @@
 // Time of the day
 VAR TIME_MORNING = "TIME_MORNING"
 VAR TIME_AFTERNOON = "TIME_AFTERNOON"
-
-// Selectable subjects
-VAR SUBJECT_MATH        = "SUBJECT_MATH"
-VAR SUBJECT_PHYSICS     = "SUBJECT_PHYSICS"
-VAR SUBJECT_ELECTRONICS = "SUBJECT_ELECTRONICS"
+VAR TIME_OF_THE_DAY = "NONE"
 
 // Selected subjects
-VAR SUBJECT_MORNING     = "NONE"
-VAR SUBJECT_AFTERNOON   = "NONE"
+VAR MORNING_STUDIES     = "NONE"
+VAR AFTERNOON_STUDIES   = "NONE"
 
 === dailyChoices ===
 This is a {~new|yet another|brand new|nice|great|funny|random} day for you !
@@ -17,71 +13,33 @@ This is a {~new|yet another|brand new|nice|great|funny|random} day for you !
 Let's chose what to do today !
 + [Validate subject study]
 
-- You guessed you'll do some <>
-{
-    - SUBJECT_MORNING == SUBJECT_MATH :
-        {~mind calcul|logic|probabilities}
-    - SUBJECT_MORNING == SUBJECT_PHYSICS :
-        {~astronomy|thermodynamics|fluid mechanics}
-    - SUBJECT_MORNING == SUBJECT_ELECTRONICS :
-        {~console flashing|boolean algebra|circuit welding}
-    - else:
-        [ERROR : Morning subject not implemented in Ink.]
-}
-<> {~this|in the|tooday's} morning and some <>
-{
-    - SUBJECT_AFTERNOON == SUBJECT_MATH :
-        {~mind calcul|logic|probabilities}
-    - SUBJECT_AFTERNOON == SUBJECT_PHYSICS :
-        {~astronomy|thermodynamics|fluid mechanics}
-    - SUBJECT_AFTERNOON == SUBJECT_ELECTRONICS :
-        {~console flashing|boolean algebra|circuit welding}
-    - else:
-        [ERROR : Aftenoon subject not implemented in Ink.]
-}
-<> {~this|in the|tooday's} afternoon.
-
-
+// Go to morning lesson
 -> morningLesson ->
+
+// Go to afternoon lesson
 -> afternoonLesson ->
+
+// Go to end of the day
 -> endOfTheDay ->
 -> DONE
 
+
+
 = morningLesson
+~ TIME_OF_THE_DAY = TIME_MORNING
 It's the morning.
-{
-    - SUBJECT_MORNING == SUBJECT_MATH :
-        You chose to study {SUBJECT_MATH} this morning.
-        -> studies.math(TIME_MORNING) ->
-    - SUBJECT_MORNING == SUBJECT_PHYSICS :
-        You chose to study {SUBJECT_PHYSICS} this morning.
-        -> studies.physics(TIME_MORNING) ->
-    - SUBJECT_MORNING == SUBJECT_ELECTRONICS :
-        You chose to study {SUBJECT_ELECTRONICS} this morning.
-        -> studies.electronics(TIME_MORNING) ->
-    - else:
-        ERROR : Morning subject not implemented in Ink.
-}
-->->
+-> MORNING_STUDIES
 -> DONE
 
+
+
 = afternoonLesson
+~ TIME_OF_THE_DAY = TIME_AFTERNOON
 It's the afternoon.
-{
-    - SUBJECT_AFTERNOON == SUBJECT_MATH :
-        You chose to study {SUBJECT_MATH} this morning.
-        -> studies.math(TIME_AFTERNOON) ->
-    - SUBJECT_AFTERNOON == SUBJECT_PHYSICS :
-        You chose to study {SUBJECT_PHYSICS} this morning.
-        -> studies.physics(TIME_AFTERNOON) ->
-    - SUBJECT_AFTERNOON == SUBJECT_ELECTRONICS :
-        You chose to study {SUBJECT_ELECTRONICS} this morning.
-        -> studies.electronics(TIME_AFTERNOON) ->
-    - else:
-        ERROR : Aftenoon subject not implemented in Ink.
-}
-->->
+-> AFTERNOON_STUDIES
 -> DONE
+
+
 
 = endOfTheDay
 Your day ended without any incident.

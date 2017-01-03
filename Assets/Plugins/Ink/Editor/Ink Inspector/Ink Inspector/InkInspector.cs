@@ -9,6 +9,7 @@ using Ink.Runtime;
 using UnityEditorInternal;
 using System.Text.RegularExpressions;
 using Object = UnityEngine.Object;
+using Path = System.IO.Path;
 
 namespace Ink.UnityIntegration {
 	public class InkInspector : DefaultAssetInspector {

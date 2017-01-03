@@ -11,7 +11,7 @@ namespace Feature.Gameplay.Data {
         public new string name = "Unamed Subject";
 
         [Header("Ink")]
-        public string subjectNameInInk = "None";
+        public string studieDivertName = "None";
 
     }
 

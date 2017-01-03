@@ -117,9 +117,6 @@ namespace Feature.Narrative {
 
         }
 
-
-
-
         /*********
          * LOGIC *
          *********/
@@ -129,7 +126,7 @@ namespace Feature.Narrative {
         public void Init() {
             story = inkSetup.Setup();
         }
-
+        
         /// <summary>
         /// This is the core method of the narrative manager. It advance in the narrative.
         /// </summary>
@@ -143,62 +140,61 @@ namespace Feature.Narrative {
             }
             else
             // Continue storry
-            {
+            if (story.canContinue) {
+                    
+                // Ink : Continue the story
+                string text = story.Continue();
+                text = text.TrimEnd('\r', '\n');
 
-                if (story.canContinue) {
+                // Check for tags
+                TagHandingOutput tagHandingOutput = TagHandingOutput.NONE;
+                List<string> tagList = story.currentTags;
+                foreach (var tag in tagList) {
 
-                    // Ink : Continue the story
-                    string text = story.Continue();
-                    text = text.TrimEnd('\r', '\n');
-
-                    // Check for tags
-                    TagHandingOutput tagHandingOutput = TagHandingOutput.NONE;
-                    List<string> tagList = story.currentTags;
-                    foreach (var tag in tagList) {
-
-                        // Handle tag
-                        tagHandingOutput |= HandleTag(tag); 
-
-                    }
-
-                    // Display text
-                    // Skip text display if requested by a tag
-                    if ((tagHandingOutput & TagHandingOutput.SKIP_TEXT_DISPLAY) == 0) {
-
-                        // Display the naration text.
-                        narrativeDisplays.text.SetTextToDisplay(text);
-
-                    } else {
-
-                        // Display nothing if a tag asked to skip text display
-                        narrativeDisplays.text.SetTextToDisplay("");
-
-                    }
-
-                    // Display choices
-                    // Skip choice display if requested by a tag
-                    if ((tagHandingOutput & TagHandingOutput.SKIP_CHOICE) == 0) {
-                        if (story.currentChoices.Count > 0) {
-
-                            narrativeDisplays.choice.ClearChoices();
-                            foreach (Choice c in story.currentChoices) {
-
-                                narrativeDisplays.choice.DisplayChoice(c, HandleChoiceChosed);
-
-                            }
-
-                        }
-                    }
-
-                } else if (story.currentChoices.Count <= 0) {
-
-                    // Reset story if it both can't continue and there is no choices left to do.
-                    story.ResetState();
-
-                    // Debug : Display the main input used to play.
-                    narrativeDisplays.text.SetTextToDisplay("Start (Left click)");
+                    // Handle tag
+                    tagHandingOutput |= HandleTag(tag);
 
                 }
+
+                // Display text
+                // Skip text display if requested by a tag
+                if ((tagHandingOutput & TagHandingOutput.SKIP_TEXT_DISPLAY) == 0) {
+
+                    // Display the naration text.
+                    narrativeDisplays.text.SetTextToDisplay(text);
+
+                } else {
+
+                    // Display nothing if a tag asked to skip text display
+                    narrativeDisplays.text.SetTextToDisplay("");
+
+                }
+
+                // Display choices
+                // Skip choice display if requested by a tag
+                if ((tagHandingOutput & TagHandingOutput.SKIP_CHOICE) == 0) {
+                    if (story.currentChoices.Count > 0) {
+
+                        narrativeDisplays.choice.ClearChoices();
+                        foreach (Choice choice in story.currentChoices) {
+
+                            narrativeDisplays.choice.DisplayChoice(choice, HandleRegualrChoiceChosed);
+
+                        }
+
+                    }
+                }
+
+            }
+            else
+            // Reset storry
+            if (story.currentChoices.Count <= 0) {
+
+                // Reset story if it both can't continue and there is no choices left to do.
+                story.ResetState();
+
+                // Debug : Display the main input used to play.
+                narrativeDisplays.text.SetTextToDisplay("Start (Left click)");
 
             }
         }
@@ -214,7 +210,7 @@ namespace Feature.Narrative {
         /// Called whenever the player select a basic choice.
         /// </summary>
         /// <param name="choice"></param>
-        public void HandleChoiceChosed(Choice choice) {
+        public void HandleRegualrChoiceChosed(Choice choice) {
             story.ChooseChoiceIndex(choice.index);
             Continue();
         }
@@ -278,7 +274,7 @@ namespace Feature.Narrative {
                 // Retrieve the daily choices display component.
                 dailyChoicesManager = dailyChoicesGo.GetComponent<Gameplay.DailyChoicesDisplay_A>();
             }
-            
+
             // Initialise the daily choices display, that will make a callback when the player is done chosing for subject.
             dailyChoicesManager.Init(HandleDailyChoiceValidation);
 
@@ -289,12 +285,12 @@ namespace Feature.Narrative {
         /// </summary>
         public void HandleDailyChoiceValidation(Gameplay.DailyChoices dailyChoices) {
 
-            // Ink : How ink global variables related to chosen subject are named.
-            const string SUBJECT_MORNING    = "SUBJECT_MORNING";
-            const string SUBJECT_AFTERNOON  = "SUBJECT_AFTERNOON";
+            // Ink : How ink global variables related to chosen subject are named in the .ink project.
+            const string MORNING_STUDIES = "MORNING_STUDIES";
+            const string AFTERNOON_STUDIES = "AFTERNOON_STUDIES";
             // Ink : Set those global variables acording to the choices made by the player.
-            story.variablesState[SUBJECT_MORNING] = dailyChoices.subjectChosenThisMorning.inkGlobalVaraibleName;
-            story.variablesState[SUBJECT_AFTERNOON] = dailyChoices.subjectChosenThisAfternoon.inkGlobalVaraibleName;
+            story.variablesState[MORNING_STUDIES] = new Path(dailyChoices.subjectChosenThisMorning.inkSutudieDivertName);
+            story.variablesState[AFTERNOON_STUDIES] = new Path(dailyChoices.subjectChosenThisAfternoon.inkSutudieDivertName);
             
             // Ink : Automatocly chose the blocking choice to tell Ink that the player finalised his choices.
             if(story.currentChoices.Count > 0) story.ChooseChoiceIndex(0);

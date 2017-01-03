@@ -8,7 +8,7 @@ namespace Feature.Gameplay {
         private Data.Subject subjectData;
 
         public string name { get { return subjectData.name; } }
-        public string inkGlobalVaraibleName { get { return subjectData.subjectNameInInk; } }
+        public string inkSutudieDivertName { get { return subjectData.studieDivertName; } }
 
         public int level = 1;
 
