@@ -5,7 +5,7 @@ using UnityEngine;
 public static class TransformUtility {
 
     /// <summary>
-    /// Destroy all childrens GameObjects of the given Transform.
+    /// Destroy all childrens GameObjects of the given transform.
     /// </summary>
     /// <param name="transform">The transform whose child will be deleted form.</param>
     public static void DestroyAllChildrens(Transform transform) {

@@ -1,0 +1,46 @@
+// Time of the day
+VAR TIME_MORNING = "TIME_MORNING"
+VAR TIME_AFTERNOON = "TIME_AFTERNOON"
+VAR TIME_OF_THE_DAY = "NONE"
+
+// Selected subjects
+VAR MORNING_STUDIES     = "NONE"
+VAR AFTERNOON_STUDIES   = "NONE"
+
+=== dailyChoices ===
+This is a {~new|yet another|brand new|nice|great|funny|random} day for you !
+#waitForDailyChoiceValidation #skipChoice
+Let's chose what to do today !
++ [Validate subject study]
+
+// Go to morning lesson
+-> morningLesson ->
+
+// Go to afternoon lesson
+-> afternoonLesson ->
+
+// Go to end of the day
+-> endOfTheDay ->
+-> DONE
+
+
+
+= morningLesson
+~ TIME_OF_THE_DAY = TIME_MORNING
+It's the morning.
+-> MORNING_STUDIES
+-> DONE
+
+
+
+= afternoonLesson
+~ TIME_OF_THE_DAY = TIME_AFTERNOON
+It's the afternoon.
+-> AFTERNOON_STUDIES
+-> DONE
+
+
+
+= endOfTheDay
+Your day ended without any incident.
+-> END

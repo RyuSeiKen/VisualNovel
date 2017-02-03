@@ -8,6 +8,7 @@ using System.Text;
 using System.Diagnostics;
 using UnityEditorInternal;
 using Debug = UnityEngine.Debug;
+using Path = System.IO.Path;
 using Ink.Runtime;
 using UnityEditor.ProjectWindowCallback;
 
