@@ -116,10 +116,7 @@ namespace Feature.Narative {
             }
 
         }
-
-
-
-
+			
         /*********
          * LOGIC *
          *********/
@@ -301,7 +298,6 @@ namespace Feature.Narative {
 
             // Continue the story.
             Continue();
-
         }
 
         /*******************

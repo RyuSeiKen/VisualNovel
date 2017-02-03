@@ -3,40 +3,44 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DayManager : MonoBehaviour 
+namespace Feature.Gameplay 
 {
-	public delegate void DayEventType(StatManager manager); 
-	public static event DayEventType OnMorning;
-	public static event DayEventType OnAfternoon;
-
-	public DayNumber currentDay = new DayNumber();
-	public DayTime currentTime = new DayTime();
-
-	public StatManager statManager;
-	public DayPlanifier planifier;
-
-	void Start()
+	public class DayManager : MonoBehaviour
 	{
-		statManager = FindObjectOfType<StatManager>();
-		planifier = FindObjectOfType<DayPlanifier>();
-	}
+		public delegate void DayEventType(); 
+		public static event DayEventType OnMorning;
+		public static event DayEventType OnAfternoon;
 
-	public void LaunchDay() 
-	{
-		if(OnMorning != null) 
-		{ 
-			OnMorning(statManager); 
-			OnMorning = null;
+		public DayNumber currentDay = new DayNumber();
+		public DayTime currentTime = new DayTime();
+
+		public DayPlanifier planifier;
+
+		void Start()
+		{
+			planifier = FindObjectOfType<DayPlanifier>();
 		}
 
-		if(OnAfternoon != null)
+		public void LaunchDay() 
 		{
-			OnAfternoon(statManager); 
-			OnAfternoon = null;
+			if(OnMorning != null) 
+			{ 
+				OnMorning(); 
+				OnMorning = null;
+			}
+
+			if(OnAfternoon != null)
+			{
+				OnAfternoon(); 
+				OnAfternoon = null;
+			} 
+			planifier.selection1 = SchoolSubjects.None;
+			planifier.button1.color = Color.white;
+			planifier.selection2 = SchoolSubjects.None;
+			if(planifier.button2 != null)
+			{
+				planifier.button2.color = Color.white;
+			}
 		} 
-		planifier.selection1 = SchoolSubjects.None;
-		planifier.button1.color = Color.white;
-		planifier.selection2 = SchoolSubjects.None;
-		planifier.button2.color = Color.white;
-	} 
+	}
 }

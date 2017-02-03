@@ -8,10 +8,10 @@ using UnityEngine.EventSystems;
 namespace Feature.Gameplay {
 
 
-    public class SubjectChoice : MonoBehaviour, IPointerClickHandler {
-            
+    public class SubjectChoice : MonoBehaviour, IPointerClickHandler 
+	{
         public Data.Subject subjectData;
-
+		public SchoolSubjects subject = new SchoolSubjects();
         public TimeOfTheDay timeOfTheDay = TimeOfTheDay.NONE;
 
         public delegate void SubjectChoiceWasClickedHandler(SubjectChoice subjectChoice);

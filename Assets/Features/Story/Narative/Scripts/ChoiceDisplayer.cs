@@ -47,6 +47,5 @@ namespace Feature.Narative
 			}
             gameObject.SetActive(false);
 		}
-			
 	}
 }

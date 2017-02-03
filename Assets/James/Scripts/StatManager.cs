@@ -4,44 +4,23 @@ using UnityEngine;
 
 public class StatManager : MonoBehaviour 
 {
-	public SubjectButton mathButton;
-	public SubjectButton geographyButton;
-
-	KnownSubject math;
-	KnownSubject geography;
-
 	public List<KnownSubject> subjectList = new List<KnownSubject>();
 
 	void LoadSubjects()
 	{
 		foreach(SchoolSubjects subject in System.Enum.GetValues(typeof(SchoolSubjects)))
 		{
-			Debug.Log(subject.ToString());
-		}
+			if(subject.ToString() != "None")
+			{
+				KnownSubject s = new KnownSubject(subject, 1);
+				subjectList.Add(s);
+			}
+		}	
 	}
 
 	void Start()
 	{
-		math = new KnownSubject(SchoolSubjects.Math, 1, mathButton);
-		subjectList.Add(math);
-		geography = new KnownSubject(SchoolSubjects.Geography, 1, geographyButton);
-		subjectList.Add(geography);
 		LoadSubjects();
-	}
-
-	void Update()
-	{
-		foreach(KnownSubject ks in subjectList)
-		{
-			if(ks.subjectLevel >= 5)
-			{
-				ks.subjectButton.maxed = true;
-			}
-			else if(ks.subjectLevel == 4)
-			{
-				ks.subjectButton.nearlyMaxed = true;
-			}
-		}
 	}
 
 	public KnownSubject FindKnownSubject(SchoolSubjects subject)
@@ -57,16 +36,16 @@ public class StatManager : MonoBehaviour
 	}
 }
 
+[System.Serializable]
 public class KnownSubject
 {
 	public SchoolSubjects subject;
 	public int subjectLevel;
-	public SubjectButton subjectButton;
-	public KnownSubject(SchoolSubjects subject, int level, SubjectButton button)
+
+	public KnownSubject(SchoolSubjects subject, int level)
 	{
 		this.subject = subject;
 		subjectLevel = level;
-		subjectButton = button;
 	}
 
 	public bool IsMaxed()
