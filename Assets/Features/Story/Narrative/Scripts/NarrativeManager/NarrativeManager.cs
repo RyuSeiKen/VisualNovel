@@ -49,19 +49,25 @@ namespace Feature.Narrative {
         public class NarrativeDisplays {
 
             [SerializeField]
-            private ShaderBasedTextDisplayAnimator textAnimator;
+			// private ShaderBasedTextDisplayAnimator textAnimator;
+			private GameObject textAnimator;
+
             [SerializeField]
             private ChoiceDisplayer choiceDisplay;
 
             /// <summary>
             /// The display system used to animate the display of regular sentences and dialogs.
             /// </summary>
-            public ITextDisplayAnimator text { get { return textAnimator; } }
+			public ITextDisplayAnimator text;
             
             /// <summary>
             /// The display system used to display choices.
             /// </summary>
             public IChoiceDisplay choice { get { return choiceDisplay; } }
+
+			public void Init(){
+				text = textAnimator.GetComponent<ITextDisplayAnimator>();
+			}
         }
 
         /// <summary>
@@ -125,6 +131,9 @@ namespace Feature.Narrative {
         /// </summary>
         public void Init() {
             story = inkSetup.Setup();
+
+			narrativeDisplays.Init();
+
         }
         
         /// <summary>

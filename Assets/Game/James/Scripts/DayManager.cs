@@ -11,6 +11,9 @@ namespace Feature.Gameplay
 		public static event DayEventType OnMorning;
 		public static event DayEventType OnAfternoon;
 
+		public SchoolSubjects selectionM;
+		public SchoolSubjects selectionA;
+
 		public DayNumber currentDay = new DayNumber();
 		public DayTime currentTime = new DayTime();
 
