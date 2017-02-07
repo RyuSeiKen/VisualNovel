@@ -1,0 +1,3 @@
+VAR MORNING_PLACE = -> sewers
+VAR AFTERNOON_PLACE = -> forest
+VAR EVENING_PLACE = -> desert

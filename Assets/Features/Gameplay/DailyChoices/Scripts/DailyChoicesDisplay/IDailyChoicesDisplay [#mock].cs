@@ -33,8 +33,8 @@ namespace Feature.Gameplay {
     /// <summary>
     /// Handler catching the choices made by the player trough the daily subjects choice event.
     /// </summary>
-    /// <param name="dailyChoicesManager">Choices the player made trough the daily subject choice event.</param>
-    public delegate void DailyChoicesValidatedHandler(DailyChoices dailyChoicesManager);
+    /// <param name="dailyChoices">Choices the player made trough the daily subject choice event.</param>
+	public delegate void DailyChoicesValidatedHandler(DailyChoices dailyChoices);
 
     /// <summary>
     /// The interface defining what methods the narrative manager needs to display the "daily subject lesson choices" event.
@@ -45,7 +45,7 @@ namespace Feature.Gameplay {
         /// Initialise the daily subjects choices event.
         /// </summary>
         /// <param name="dailyChoicesValidatedHandler">Handler catching the choices made by the player trough this daily subjects choice event.</param>
-        void Init(DailyChoicesValidatedHandler dailyChoicesValidatedHandler);
+		void Init(DailyChoicesValidatedHandler dailyChoicesValidatedHandler);
 
     }
 }

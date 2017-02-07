@@ -25,7 +25,7 @@ public class TextBox : MonoBehaviour , Feature.Narrative.ITextDisplayAnimator
 			GetComponent<Text>().text += letter; 
 			if(letter != " "[0] && letter != "."[0] && letter != "?"[0] && letter != "!"[0])
 			{
-				//source.PlayOneShot(dialogue,1);
+				source.PlayOneShot(dialogue,1);
 			}
 			yield return new WaitForSeconds(pause);
 		}

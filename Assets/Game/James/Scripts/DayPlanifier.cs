@@ -3,20 +3,69 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Feature.Gameplay 
+namespace James 
 {
-	public class DayPlanifier : MonoBehaviour 
+
+
+	/// <summary>
+	/// The data class representing choices the player made trough the daily subject choice event.
+	/// </summary>
+	public class DailyChoices {
+
+		/// <summary>
+		/// The subject the player chosed to study in the morning.
+		/// </summary>
+		public Feature.Gameplay.Data.Subject subjectChosenThisMorning = null;
+
+		/// <summary>
+		/// The subject the player chosed to study in the afternoon.
+		/// </summary>
+		public Feature.Gameplay.Data.Subject subjectChosenThisAfternoon = null;
+
+		/// <summary>
+		/// The subject the player chosed to study in the evening.
+		/// </summary>
+		public Feature.Gameplay.Data.Subject subjectChosenThisEvening = null;
+
+		/// <summary>
+		/// Return if both subjects were chosen.
+		/// </summary>
+		/// <returns></returns>
+		public bool IsValid() {
+			return
+				subjectChosenThisMorning != null &&
+				subjectChosenThisAfternoon != null &&
+				subjectChosenThisEvening != null;
+		}
+	}
+
+
+	/// <summary>
+	/// Handler catching the choices made by the player trough the daily subjects choice event.
+	/// </summary>
+	/// <param name="dailyChoices">Choices the player made trough the daily subject choice event.</param>
+	public delegate void DailyChoicesValidatedHandler(DailyChoices dailyChoices);
+
+	public class DayPlanifier : MonoBehaviour
 	{
-		public SchoolSubjects selection1;
 		public Image button1;
-		public SchoolSubjects selection2;
 		public Image button2;
+		public Image button3;
 
 		public bool morningChosen;
 		public bool afternoonChosen;
+		public bool eveningChosen;
 
 		StatManager sManager;
 		DayManager dManager;
+
+		DailyChoices dailyChoicesMade;
+
+		public GameObject container;
+
+		private void Awake(){
+			container.SetActive(false);
+		}
 
 		void Start()
 		{
@@ -28,62 +77,64 @@ namespace Feature.Gameplay
 
 		void ImproveSubject(SubjectChoiceButton subject)
 		{
-			sManager.FindKnownSubject(subject.subject).subjectLevel += 1;
+//			sManager.FindKnownSubject(subject.subject).subjectLevel += 1;
 		}
+
 
 		void Update()
 		{
 			if(Input.GetKeyDown(KeyCode.Backspace))
 			{
-//				RemoveChoice();
+				dManager.RemoveChoice();
 			}
 		}
 
 		public void OnButtonClicked(SubjectChoiceButton subject) 
 		{ 
-			if(sManager.FindKnownSubject(subject.subject).IsMaxed())
-			{
-				Debug.Log("Maxed");
-				return;
+			switch(subject.time){
+			case DayTime.Morning:
+				dailyChoicesMade.subjectChosenThisMorning = subject.subjectData;
+				break;
+			case DayTime.Afternoon:
+				dailyChoicesMade.subjectChosenThisAfternoon = subject.subjectData;
+				break;
+			case DayTime.Evening:
+				dailyChoicesMade.subjectChosenThisEvening = subject.subjectData;
+				break;
 			}
-			else if(selection1 == SchoolSubjects.None)
+
+			if(morningChosen == false)
 			{
-				DayManager.OnMorning += delegate {
-					ImproveSubject(subject);
+				DayManager.OnMorning += delegate 
+				{
+					
 				};
-				dManager.selectionM = subject.subject;
-//				morningChosen = true;
-				selection1 = subject.subject;
+				morningChosen = true;
 				button1 = subject.transform.GetComponent<Image>();
 				button1.color = Color.red;
 				return;
 			}
-			else if(sManager.FindKnownSubject(subject.subject).IsNearlyMaxed() && subject.subject == selection1)
+			else if(afternoonChosen == false)
 			{
-				Debug.Log("Nearly Maxed");
-				return;
-			}
-			else if(selection2 == SchoolSubjects.None)
-			{
-				DayManager.OnAfternoon += delegate {
-					ImproveSubject(subject);
+				DayManager.OnAfternoon += delegate 
+				{
+					
 				};
-//				afternoonChosen = true;
-				selection2 = subject.subject;
+				afternoonChosen = true;
 				button2 = subject.transform.GetComponent<Image>();
-				if(selection1 == selection2)
-				{
-					button2.color = Color.magenta;
-				}
-				else
-				{
-					button2.color = Color.blue;
-				}
+				button2.color = Color.blue;
 				return;
 			}
-			else
+			else if(eveningChosen == false)
 			{
-				Debug.Log("You may only choose two activities for today!");
+				DayManager.OnEvening += delegate 
+				{
+					
+				};
+				eveningChosen = true;
+				button3 = subject.transform.GetComponent<Image>();
+				button3.color = Color.green;
+				return;
 			}
 		}
 
@@ -116,7 +167,28 @@ namespace Feature.Gameplay
 //			else
 //			{
 //				Debug.Log("You have not yet made a single choice!");
-//			}
+		//			}
 //		}
+
+		//#region IDailyChoicesDisplay implementation
+
+		James.DailyChoicesValidatedHandler eDailyChoicesValidatedHandler;
+
+
+		public void Init (James.DailyChoicesValidatedHandler dailyChoicesValidatedHandler)
+		{
+			this.eDailyChoicesValidatedHandler = dailyChoicesValidatedHandler;
+			dailyChoicesMade = new DailyChoices();
+
+			container.SetActive(true);
+		}
+
+		public void Done(){
+			eDailyChoicesValidatedHandler(dailyChoicesMade);
+
+			container.SetActive(false);
+		}
+
+		//#endregion
 	}
 }

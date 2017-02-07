@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum SchoolSubjects : int
 {
-	None,
+	NULL,
 	Math,
 	English,
 	Geography,
@@ -14,8 +14,22 @@ public enum SchoolSubjects : int
 	Chemistry
 };
 
+public enum Places : int
+{
+	NULL,
+	Sewers,
+	Forest,
+	Desert,
+	Volcano,
+	Blacksmith,
+	Tavern,
+	Church
+};
+	
+
 public enum DayNumber : int
 {
+	NULL,
 	Day1,
 	Day2,
 	Day3,
@@ -28,8 +42,9 @@ public enum DayNumber : int
 
 public enum DayTime : int
 {
+	NULL,
 	Morning,
-	Midday,
+	Afternoon,
 	Evening,
-	Night,
+	Night
 };
