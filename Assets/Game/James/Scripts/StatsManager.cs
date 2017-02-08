@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Ink.Runtime;
 
-public class StatManager : MonoBehaviour 
+public class StatsManager : MonoBehaviour 
 {
 	public Story story = null;
 

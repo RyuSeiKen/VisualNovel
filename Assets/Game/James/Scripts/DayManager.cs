@@ -3,40 +3,78 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DayManager : MonoBehaviour 
+namespace James
 {
-	public delegate void DayEventType(StatManager manager); 
-	public static event DayEventType OnMorning;
-	public static event DayEventType OnAfternoon;
-
-	public DayNumber currentDay = new DayNumber();
-	public DayTime currentTime = new DayTime();
-
-	public StatManager statManager;
-	public DayPlanifier planifier;
-
-	void Start()
+	public class DayManager : MonoBehaviour
 	{
-		statManager = FindObjectOfType<StatManager>();
-		planifier = FindObjectOfType<DayPlanifier>();
-	}
+		public delegate void DayEventType(); 
+		public static event DayEventType OnMorning;
+		public static event DayEventType OnAfternoon;
+		public static event DayEventType OnEvening;
 
-	public void LaunchDay() 
-	{
-		if(OnMorning != null) 
-		{ 
-			OnMorning(statManager); 
-			OnMorning = null;
+		public DayNumber currentDay = new DayNumber();
+		public DayTime currentTime = new DayTime();
+
+		public DayPlanifier planifier;
+
+		void Start()
+		{
+			planifier = FindObjectOfType<DayPlanifier>();
 		}
 
-		if(OnAfternoon != null)
+		public void RemoveChoice()
 		{
-			OnAfternoon(statManager); 
-			OnAfternoon = null;
+			DayManager.OnMorning = null;
+			DayManager.OnAfternoon = null;
+			DayManager.OnEvening = null;
+
+//			if(selection2 != SchoolSubjects.None)
+//			{
+//				if(selection1 == selection2)
+//				{
+//					button2.color = Color.red;
+//				}
+//				else
+//				{
+//					button2.color = Color.white;
+//				}
+//				DayManager.OnAfternoon -= ImproveSubject;
+//				selection2 = SchoolSubjects.None;
+//				return;
+//			}
+//			else if(selection1 != SchoolSubjects.None)
+//			{
+//				button1.color = Color.white;
+//				DayManager.OnMorning -= ImproveSubject;
+//				selection1 = SchoolSubjects.None;
+//				return;
+//			}
+//			else
+//			{
+//				Debug.Log("You have not yet made a single choice!");
+//			}
+		}
+
+
+		public void LaunchDay() 
+		{
+			if(OnMorning != null) 
+			{ 
+				OnMorning(); 
+				OnMorning = null;
+			}
+
+			if(OnAfternoon != null)
+			{
+				OnAfternoon(); 
+				OnAfternoon = null;
+			} 
+
+			if(OnEvening != null)
+			{
+				OnEvening(); 
+				OnEvening = null;
+			} 
 		} 
-		planifier.selection1 = SchoolSubjects.None;
-		planifier.button1.color = Color.white;
-		planifier.selection2 = SchoolSubjects.None;
-		planifier.button2.color = Color.white;
-	} 
+	}
 }

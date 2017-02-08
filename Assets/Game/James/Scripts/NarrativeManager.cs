@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using Ink.Runtime;
+using Feature.Gameplay;
+using Feature.Narrative;
 
-namespace Feature.Narrative {
+namespace James {
     
-    public class NarrativeManager : MonoBehaviour, INarrativeManager {
+    public class NarrativeManager : MonoBehaviour
+	{
 
         /*******
          * INK *
@@ -53,7 +56,7 @@ namespace Feature.Narrative {
 			private GameObject textAnimator;
 
             [SerializeField]
-            private ChoiceDisplayer choiceDisplay;
+            private GameObject choiceDisplay;
 
             /// <summary>
             /// The display system used to animate the display of regular sentences and dialogs.
@@ -63,7 +66,7 @@ namespace Feature.Narrative {
             /// <summary>
             /// The display system used to display choices.
             /// </summary>
-            public IChoiceDisplay choice { get { return choiceDisplay; } }
+			public IChoiceDisplay choice;
 
 			public void Init(){
 				text = textAnimator.GetComponent<ITextDisplayAnimator>();
@@ -85,12 +88,7 @@ namespace Feature.Narrative {
         public class GameplayDisplays {
 
             [SerializeField]
-            private Gameplay.DailyChoicesDisplay_A dailyChoicesDisplay;
-
-            /// <summary>
-            /// The display system used to display the daily subject choices event.
-            /// </summary>
-            public Gameplay.IDailyChoicesDisplay dailyChoices { get { return dailyChoicesDisplay; } }
+			public DayPlanifier dayPlanifier;
         }
 
         /// <summary>
@@ -115,12 +113,9 @@ namespace Feature.Narrative {
         /// </summary>
         private void Update() {
 
-            // If the player use the left click or is holding the skip key,
-            if (Input.GetMouseButtonDown(0) || Input.GetKey(KeyCode.LeftControl)) {
-
-                // Then, continue the story
+            if (Input.GetMouseButtonDown(0) || Input.GetKey(KeyCode.LeftControl)) 
+			{
                 Continue();
-
             }
 
         }
@@ -239,7 +234,7 @@ namespace Feature.Narrative {
         }
 
         /// <summary>
-        /// Called whenever a tag is detected, parse it.
+        /// Called whenever a tag is detected on a 
         /// </summary>
         /// <param name="tag"></param>
         public TagHandingOutput HandleTag(string tag) {
@@ -247,7 +242,7 @@ namespace Feature.Narrative {
             TagHandingOutput output = TagHandingOutput.NONE;
 
             switch (tag) {
-                case "waitForDailyChoiceValidation":
+                case "choose":
                     HandleDailyChoices();
                     break;
                 case "skipText":
@@ -274,7 +269,7 @@ namespace Feature.Narrative {
         public void HandleDailyChoices() {
 
             // Retrieve the daily choices display that will be used to display the daily choices.
-            Gameplay.IDailyChoicesDisplay dailyChoicesManager = gameplayDisplays.dailyChoices;
+			DayPlanifier dailyChoicesManager = gameplayDisplays.dayPlanifier;
 
             // Initialise the daily choices display, that will make a callback when the player is done chosing for subject.
             dailyChoicesManager.Init(HandleDailyChoiceValidation);
@@ -284,15 +279,18 @@ namespace Feature.Narrative {
         /// <summary>
         /// HandleDailyChoiceValidation() is called whenever the player has finiched chosing his daily subject trough the daily subjects choices disaply.
         /// </summary>
-        public void HandleDailyChoiceValidation(Gameplay.DailyChoices dailyChoices) {
+        public void HandleDailyChoiceValidation(James.DailyChoices dailyChoices) {
 
             // Ink : How ink global variables related to chosen subject are named in the .ink project.
-            const string MORNING_STUDIES = "MORNING_STUDIES";
-            const string AFTERNOON_STUDIES = "AFTERNOON_STUDIES";
+			const string MORNING_PLACE = "MORNING_PLACE";
+			const string AFTERNOON_PLACE = "AFTERNOON_PLACE";
+			const string EVENING_PLACE = "EVENING_PLACE";
+
             // Ink : Set those global variables acording to the choices made by the player.
-            story.variablesState[MORNING_STUDIES] = new Path(dailyChoices.subjectChosenThisMorning.inkSutudieDivertName);
-            story.variablesState[AFTERNOON_STUDIES] = new Path(dailyChoices.subjectChosenThisAfternoon.inkSutudieDivertName);
-            
+			story.variablesState[MORNING_PLACE] = new Path(dailyChoices.subjectChosenThisMorning.studieDivertName);
+			story.variablesState[AFTERNOON_PLACE] = new Path(dailyChoices.subjectChosenThisAfternoon.studieDivertName);
+			story.variablesState[EVENING_PLACE] = new Path(dailyChoices.subjectChosenThisEvening.studieDivertName);
+
             // Ink : Automatocly chose the blocking choice to tell Ink that the player finalised his choices.
             if(story.currentChoices.Count > 0) story.ChooseChoiceIndex(0);
 

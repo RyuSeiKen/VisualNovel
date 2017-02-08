@@ -44,6 +44,5 @@ namespace Feature.Narrative
             TransformUtility.DestroyAllChildrens(choiceContainer);
             gameObject.SetActive(false);
 		}
-			
 	}
 }

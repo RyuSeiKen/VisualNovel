@@ -3,99 +3,215 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DayPlanifier : MonoBehaviour 
+namespace James 
 {
-	public SchoolSubjects selection1;
-	public Image button1;
-	public SchoolSubjects selection2;
-	public Image button2;
 
-	void ImproveSubject1(StatManager manager)
-	{
-		manager.FindKnownSubject(selection1).subjectLevel += 1;
-	}
 
-	void ImproveSubject2(StatManager manager)
-	{
-		manager.FindKnownSubject(selection2).subjectLevel += 1;
-	}
+	/// <summary>
+	/// The data class representing choices the player made trough the daily subject choice event.
+	/// </summary>
+	public class DailyChoices {
 
-	void Update()
-	{
-		if(Input.GetKeyDown(KeyCode.Backspace))
+		/// <summary>
+		/// The subject the player chosed to study in the morning.
+		/// </summary>
+		public Feature.Gameplay.Data.Subject subjectChosenThisMorning = null;
+
+		/// <summary>
+		/// The subject the player chosed to study in the afternoon.
+		/// </summary>
+		public Feature.Gameplay.Data.Subject subjectChosenThisAfternoon = null;
+
+		/// <summary>
+		/// The subject the player chosed to study in the evening.
+		/// </summary>
+		public Feature.Gameplay.Data.Subject subjectChosenThisEvening = null;
+
+		/// <summary>
+		/// Return if both subjects were chosen.
+		/// </summary>
+		/// <returns></returns>
+		public bool IsValid() 
 		{
-			RemoveChoice();
+			return
+				subjectChosenThisMorning != null &&
+				subjectChosenThisAfternoon != null &&
+				subjectChosenThisEvening != null;
 		}
 	}
 
-	public void OnButtonClicked(SubjectButton subject) 
-	{ 
-		if(subject.maxed)
-		{
-			Debug.Log("You've already mastered this subject!");
-			return;
+
+	/// <summary>
+	/// Handler catching the choices made by the player trough the daily subjects choice event.
+	/// </summary>
+	/// <param name="dailyChoices">Choices the player made trough the daily subject choice event.</param>
+	public delegate void DailyChoicesValidatedHandler(DailyChoices dailyChoices);
+
+	public class DayPlanifier : MonoBehaviour
+	{
+		public Image button1;
+		public Image button2;
+		public Image button3;
+
+		public bool morningChosen;
+		public bool afternoonChosen;
+		public bool eveningChosen;
+
+		StatManager sManager;
+		DayManager dManager;
+
+		DailyChoices dailyChoicesMade;
+
+		public GameObject container;
+		public Button validate;
+
+		private void Awake(){
+			container.SetActive(false);
 		}
-		else if(selection1 == SchoolSubjects.None)
+
+		void Start()
 		{
-			
-			DayManager.OnMorning += ImproveSubject1;
-			selection1 = subject.subject;
-			button1 = subject.transform.GetComponent<Image>();
-			button1.color = Color.red;
-			return;
+			sManager = FindObjectOfType<StatManager>();
+			dManager = FindObjectOfType<DayManager>();
+
+			SubjectChoiceButton.eSubjectChoiceButtonWasClicked += OnButtonClicked;
 		}
-		else if(subject.subject == selection1 && subject.nearlyMaxed)
+
+		void OnDestroy()
 		{
-			Debug.Log("You don't need to go over this more than once!");
-			return;
+			SubjectChoiceButton.eSubjectChoiceButtonWasClicked -= OnButtonClicked;
 		}
-		else if(selection2 == SchoolSubjects.None)
+
+		void Update()
 		{
-			DayManager.OnAfternoon += ImproveSubject2;
-			selection2 = subject.subject;
-			button2 = subject.transform.GetComponent<Image>();
-			if(selection1 == selection2)
+			if(Input.GetKeyDown(KeyCode.Backspace))
 			{
-				button2.color = Color.magenta;
+				dManager.RemoveChoice();
 			}
-			else
+		}
+
+		public void OnButtonClicked(SubjectChoiceButton subject) 
+		{ 
+			switch(subject.time)
 			{
+			case DayTime.Morning:
+				dailyChoicesMade.subjectChosenThisMorning = subject.subjectData;
+				break;
+			case DayTime.Afternoon:
+				dailyChoicesMade.subjectChosenThisAfternoon = subject.subjectData;
+				break;
+			case DayTime.Evening:
+				dailyChoicesMade.subjectChosenThisEvening = subject.subjectData;
+				break;
+			}
+
+			if(subject.time == DayTime.Morning)
+			{
+				if(button1 != null)
+				{
+					button1.color = Color.black;
+				}
+				morningChosen = true;
+				button1 = subject.transform.GetComponent<Image>();
+				button1.color = Color.red;
+			}
+			else if(subject.time == DayTime.Afternoon)
+			{
+				if(button2 != null)
+				{
+					button2.color = Color.black;
+				}
+				afternoonChosen = true;
+				button2 = subject.transform.GetComponent<Image>();
 				button2.color = Color.blue;
 			}
-			return;
-		}
-		else
-		{
-			Debug.Log("You may only choose two activities for today!");
-		}
-	}
+			else if(subject.time == DayTime.Evening)
+			{
+				if(button3 != null)
+				{
+					button3.color = Color.black;
+				}
+				eveningChosen = true;
+				button3 = subject.transform.GetComponent<Image>();
+				button3.color = Color.green;
+			}
 
-	void RemoveChoice()
-	{
-		if(selection2 != SchoolSubjects.None)
-		{
-			if(selection1 == selection2)
+			Debug.Log(dailyChoicesMade.IsValid());
+			if(dailyChoicesMade.IsValid())
 			{
-				button2.color = Color.red;
+				Debug.Log("lol");
+				validate.interactable = true;
 			}
-			else
+				
+		}
+
+//		void RemoveChoice()
+//		{
+//			DayManager.OnMorning = null;
+//			DayManager.OnAfternoon = null;
+//
+//			if(selection2 != SchoolSubjects.None)
+//			{
+//				if(selection1 == selection2)
+//				{
+//					button2.color = Color.red;
+//				}
+//				else
+//				{
+//					button2.color = Color.white;
+//				}
+//				DayManager.OnAfternoon -= ImproveSubject;
+//				selection2 = SchoolSubjects.None;
+//				return;
+//			}
+//			else if(selection1 != SchoolSubjects.None)
+//			{
+//				button1.color = Color.white;
+//				DayManager.OnMorning -= ImproveSubject;
+//				selection1 = SchoolSubjects.None;
+//				return;
+//			}
+//			else
+//			{
+//				Debug.Log("You have not yet made a single choice!");
+		//			}
+//		}
+
+		//#region IDailyChoicesDisplay implementation
+
+		James.DailyChoicesValidatedHandler eDailyChoicesValidatedHandler;
+
+
+		public void Init (James.DailyChoicesValidatedHandler dailyChoicesValidatedHandler)
+		{
+			this.eDailyChoicesValidatedHandler = dailyChoicesValidatedHandler;
+			dailyChoicesMade = new DailyChoices();
+
+			validate.interactable = false;
+			container.SetActive(true);
+		}
+
+		public void Done()
+		{
+			eDailyChoicesValidatedHandler(dailyChoicesMade);
+
+			morningChosen = false;
+			afternoonChosen = false;
+			eveningChosen = false;
+
+			button1.color = Color.black;
+			if(button2 != null)
 			{
-				button2.color = Color.white;
+				button2.color = Color.black;
 			}
-			DayManager.OnAfternoon -= ImproveSubject2;
-			selection2 = SchoolSubjects.None;
-			return;
+			if(button3 != null)
+			{
+				button3.color = Color.black;
+			}
+
+			container.SetActive(false);
 		}
-		else if(selection1 != SchoolSubjects.None)
-		{
-			button1.color = Color.white;
-			DayManager.OnMorning -= ImproveSubject1;
-			selection1 = SchoolSubjects.None;
-			return;
-		}
-		else
-		{
-			Debug.Log("You have not yet made a single choice!");
-		}
+
+		//#endregion
 	}
 }

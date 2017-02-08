@@ -4,14 +4,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using Feature.Gameplay.Data;
 
-namespace Feature.Gameplay 
+namespace James
 {
     public class SubjectChoiceButton : MonoBehaviour, IPointerClickHandler 
 	{
-		public Data.Subject subjectData;
-		public Places place = Places.NULL;
-        public TimeOfTheDay timeOfTheDay = TimeOfTheDay.NONE;
+		public Subject subjectData;
+		public Places place = new Places();
+		public DayTime time = new DayTime();
 
         public delegate void SubjectChoiceWasClickedHandler(SubjectChoiceButton subjectChoiceButton);
         public static SubjectChoiceWasClickedHandler eSubjectChoiceButtonWasClicked;
