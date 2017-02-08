@@ -4,13 +4,17 @@ VAR TIME_AFTERNOON = "TIME_AFTERNOON"
 VAR TIME_OF_THE_DAY = "NONE"
 
 // Selected subjects
-VAR MORNING_STUDIES     = "NONE"
-VAR AFTERNOON_STUDIES   = "NONE"
+VAR MORNING_STUDIES     = ->studies.math
+VAR AFTERNOON_STUDIES   = ->studies.math
+
+VAR DAY = 1
+VAR DAYLY_EVENT   = ->studies.math
 
 === dailyChoices ===
-This is a {~new|yet another|brand new|nice|great|funny|random} day for you !
+
+You chosed to craft 
 #waitForDailyChoiceValidation #skipChoice
-Let's chose what to do today !
+Let's choose what to do today !
 + [Validate subject study]
 
 // Go to morning lesson
@@ -40,7 +44,14 @@ It's the afternoon.
 -> DONE
 
 
+= mood_event
+-> DONE
+
+= daily_event
+-> DONE
+
 
 = endOfTheDay
 Your day ended without any incident.
+~ DAY ++
 -> END

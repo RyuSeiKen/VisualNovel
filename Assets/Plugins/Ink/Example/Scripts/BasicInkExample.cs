@@ -40,7 +40,7 @@ public class BasicInkExample : MonoBehaviour {
 			for (int i = 0; i < story.currentChoices.Count; i++) {
 				Choice choice = story.currentChoices [i];
 				Button button = CreateChoiceView (choice.text.Trim ());
-				button.onClick.AddListener (delegate {
+                button.onClick.AddListener (delegate {
 					OnClickChoiceButton (choice);
 				});
 			}
