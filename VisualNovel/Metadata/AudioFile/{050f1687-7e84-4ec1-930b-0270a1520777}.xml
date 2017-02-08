@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.08.00">
+    <object class="AudioFile" id="{050f1687-7e84-4ec1-930b-0270a1520777}">
+        <property name="assetPath">
+            <value>41 Big Jackpot.mp3</value>
+        </property>
+        <property name="isStreaming">
+            <value>true</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>44.0999985</value>
+        </property>
+        <property name="channelCount">
+            <value>2</value>
+        </property>
+        <property name="length">
+            <value>7.3404081632653062</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{8e58ced0-80f3-428d-9187-33a96b6eb113}</destination>
+        </relationship>
+    </object>
+</objects>

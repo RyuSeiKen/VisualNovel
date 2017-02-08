@@ -10,7 +10,7 @@ namespace James {
     
     public class NarrativeManager : MonoBehaviour
 	{
-
+		public StatManager sManager;
         /*******
          * INK *
          *******/
@@ -129,6 +129,8 @@ namespace James {
         public void Init() {
             story = inkSetup.Setup();
 
+			sManager.story = story;
+
 			narrativeDisplays.Init();
 
         }
@@ -169,12 +171,7 @@ namespace James {
                     // Display the naration text.
                     narrativeDisplays.text.SetTextToDisplay(text);
 
-                } else {
-
-                    // Display nothing if a tag asked to skip text display
-                    narrativeDisplays.text.SetTextToDisplay("");
-
-                }
+                } 
 
                 // Display choices
                 // Skip choice display if requested by a tag
@@ -204,10 +201,7 @@ namespace James {
 
             }
         }
-
-
-
-
+			
         /*****************************
          * INK CONVENTIONAL HANDLERS *
          *****************************/
@@ -277,7 +271,7 @@ namespace James {
         }
 
         /// <summary>
-        /// HandleDailyChoiceValidation() is called whenever the player has finiched chosing his daily subject trough the daily subjects choices disaply.
+        /// HandleDailyChoiceValidation() is called whenever the player has finished chosing his daily subject trough the daily subjects choices disaply.
         /// </summary>
         public void HandleDailyChoiceValidation(James.DailyChoices dailyChoices) {
 

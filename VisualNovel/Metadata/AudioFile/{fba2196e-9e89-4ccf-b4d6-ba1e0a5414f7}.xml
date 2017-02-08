@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.08.00">
+    <object class="AudioFile" id="{fba2196e-9e89-4ccf-b4d6-ba1e0a5414f7}">
+        <property name="assetPath">
+            <value>22 Mysterious Shrine.mp3</value>
+        </property>
+        <property name="isStreaming">
+            <value>true</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>44.0999985</value>
+        </property>
+        <property name="channelCount">
+            <value>2</value>
+        </property>
+        <property name="length">
+            <value>100.07510204081633</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{8e58ced0-80f3-428d-9187-33a96b6eb113}</destination>
+        </relationship>
+    </object>
+</objects>

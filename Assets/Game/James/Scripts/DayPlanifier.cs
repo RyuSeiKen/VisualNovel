@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 namespace James 
 {
-
-
 	/// <summary>
 	/// The data class representing choices the player made trough the daily subject choice event.
 	/// </summary>
@@ -40,7 +38,6 @@ namespace James
 		}
 	}
 
-
 	/// <summary>
 	/// Handler catching the choices made by the player trough the daily subjects choice event.
 	/// </summary>
@@ -57,9 +54,6 @@ namespace James
 		public bool afternoonChosen;
 		public bool eveningChosen;
 
-		StatManager sManager;
-		DayManager dManager;
-
 		DailyChoices dailyChoicesMade;
 
 		public GameObject container;
@@ -71,23 +65,12 @@ namespace James
 
 		void Start()
 		{
-			sManager = FindObjectOfType<StatManager>();
-			dManager = FindObjectOfType<DayManager>();
-
 			SubjectChoiceButton.eSubjectChoiceButtonWasClicked += OnButtonClicked;
 		}
 
 		void OnDestroy()
 		{
 			SubjectChoiceButton.eSubjectChoiceButtonWasClicked -= OnButtonClicked;
-		}
-
-		void Update()
-		{
-			if(Input.GetKeyDown(KeyCode.Backspace))
-			{
-				dManager.RemoveChoice();
-			}
 		}
 
 		public void OnButtonClicked(SubjectChoiceButton subject) 
@@ -111,7 +94,6 @@ namespace James
 				{
 					button1.color = Color.black;
 				}
-				morningChosen = true;
 				button1 = subject.transform.GetComponent<Image>();
 				button1.color = Color.red;
 			}
@@ -121,9 +103,8 @@ namespace James
 				{
 					button2.color = Color.black;
 				}
-				afternoonChosen = true;
 				button2 = subject.transform.GetComponent<Image>();
-				button2.color = Color.blue;
+				button2.color = Color.green;
 			}
 			else if(subject.time == DayTime.Evening)
 			{
@@ -131,51 +112,16 @@ namespace James
 				{
 					button3.color = Color.black;
 				}
-				eveningChosen = true;
 				button3 = subject.transform.GetComponent<Image>();
-				button3.color = Color.green;
+				button3.color = Color.blue;	
 			}
 
-			Debug.Log(dailyChoicesMade.IsValid());
 			if(dailyChoicesMade.IsValid())
 			{
-				Debug.Log("lol");
 				validate.interactable = true;
 			}
 				
 		}
-
-//		void RemoveChoice()
-//		{
-//			DayManager.OnMorning = null;
-//			DayManager.OnAfternoon = null;
-//
-//			if(selection2 != SchoolSubjects.None)
-//			{
-//				if(selection1 == selection2)
-//				{
-//					button2.color = Color.red;
-//				}
-//				else
-//				{
-//					button2.color = Color.white;
-//				}
-//				DayManager.OnAfternoon -= ImproveSubject;
-//				selection2 = SchoolSubjects.None;
-//				return;
-//			}
-//			else if(selection1 != SchoolSubjects.None)
-//			{
-//				button1.color = Color.white;
-//				DayManager.OnMorning -= ImproveSubject;
-//				selection1 = SchoolSubjects.None;
-//				return;
-//			}
-//			else
-//			{
-//				Debug.Log("You have not yet made a single choice!");
-		//			}
-//		}
 
 		//#region IDailyChoicesDisplay implementation
 
@@ -195,10 +141,6 @@ namespace James
 		{
 			eDailyChoicesValidatedHandler(dailyChoicesMade);
 
-			morningChosen = false;
-			afternoonChosen = false;
-			eveningChosen = false;
-
 			button1.color = Color.black;
 			if(button2 != null)
 			{
@@ -211,7 +153,6 @@ namespace James
 
 			container.SetActive(false);
 		}
-
 		//#endregion
 	}
 }
