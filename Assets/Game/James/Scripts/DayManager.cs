@@ -75,20 +75,6 @@ namespace James
 				OnEvening(); 
 				OnEvening = null;
 			} 
-
-			planifier.morningChosen = false;
-			planifier.afternoonChosen = false;
-			planifier.eveningChosen = false;
-
-			planifier.button1.color = Color.black;
-			if(planifier.button2 != null)
-			{
-				planifier.button2.color = Color.black;
-			}
-			if(planifier.button3 != null)
-			{
-				planifier.button3.color = Color.black;
-			}
 		} 
 	}
 }

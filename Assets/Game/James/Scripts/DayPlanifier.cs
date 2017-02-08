@@ -31,7 +31,8 @@ namespace James
 		/// Return if both subjects were chosen.
 		/// </summary>
 		/// <returns></returns>
-		public bool IsValid() {
+		public bool IsValid() 
+		{
 			return
 				subjectChosenThisMorning != null &&
 				subjectChosenThisAfternoon != null &&
@@ -62,6 +63,7 @@ namespace James
 		DailyChoices dailyChoicesMade;
 
 		public GameObject container;
+		public Button validate;
 
 		private void Awake(){
 			container.SetActive(false);
@@ -75,11 +77,10 @@ namespace James
 			SubjectChoiceButton.eSubjectChoiceButtonWasClicked += OnButtonClicked;
 		}
 
-		void ImproveSubject(SubjectChoiceButton subject)
+		void OnDestroy()
 		{
-//			sManager.FindKnownSubject(subject.subject).subjectLevel += 1;
+			SubjectChoiceButton.eSubjectChoiceButtonWasClicked -= OnButtonClicked;
 		}
-
 
 		void Update()
 		{
@@ -91,7 +92,8 @@ namespace James
 
 		public void OnButtonClicked(SubjectChoiceButton subject) 
 		{ 
-			switch(subject.time){
+			switch(subject.time)
+			{
 			case DayTime.Morning:
 				dailyChoicesMade.subjectChosenThisMorning = subject.subjectData;
 				break;
@@ -103,39 +105,44 @@ namespace James
 				break;
 			}
 
-			if(morningChosen == false)
+			if(subject.time == DayTime.Morning)
 			{
-				DayManager.OnMorning += delegate 
+				if(button1 != null)
 				{
-					
-				};
+					button1.color = Color.black;
+				}
 				morningChosen = true;
 				button1 = subject.transform.GetComponent<Image>();
 				button1.color = Color.red;
-				return;
 			}
-			else if(afternoonChosen == false)
+			else if(subject.time == DayTime.Afternoon)
 			{
-				DayManager.OnAfternoon += delegate 
+				if(button2 != null)
 				{
-					
-				};
+					button2.color = Color.black;
+				}
 				afternoonChosen = true;
 				button2 = subject.transform.GetComponent<Image>();
 				button2.color = Color.blue;
-				return;
 			}
-			else if(eveningChosen == false)
+			else if(subject.time == DayTime.Evening)
 			{
-				DayManager.OnEvening += delegate 
+				if(button3 != null)
 				{
-					
-				};
+					button3.color = Color.black;
+				}
 				eveningChosen = true;
 				button3 = subject.transform.GetComponent<Image>();
 				button3.color = Color.green;
-				return;
 			}
+
+			Debug.Log(dailyChoicesMade.IsValid());
+			if(dailyChoicesMade.IsValid())
+			{
+				Debug.Log("lol");
+				validate.interactable = true;
+			}
+				
 		}
 
 //		void RemoveChoice()
@@ -180,11 +187,27 @@ namespace James
 			this.eDailyChoicesValidatedHandler = dailyChoicesValidatedHandler;
 			dailyChoicesMade = new DailyChoices();
 
+			validate.interactable = false;
 			container.SetActive(true);
 		}
 
-		public void Done(){
+		public void Done()
+		{
 			eDailyChoicesValidatedHandler(dailyChoicesMade);
+
+			morningChosen = false;
+			afternoonChosen = false;
+			eveningChosen = false;
+
+			button1.color = Color.black;
+			if(button2 != null)
+			{
+				button2.color = Color.black;
+			}
+			if(button3 != null)
+			{
+				button3.color = Color.black;
+			}
 
 			container.SetActive(false);
 		}

@@ -1,10 +1,17 @@
 INCLUDE narativeFunctions
 INCLUDE dailyChoices
-INCLUDE studies
 
-Hello there, welcome to the game! 
+Hello there, welcome to Delegate Quest! 
 
-You must now choose a subject to study.
+An evil and maniacal Dragon has been spotted near the Volcano, and he threatens to destroy the Kingdom of Disonance Cognitive in seven days. ONLY YOU CAN STOP HIM!
+
+But you are not strong enough yet to defeat him. You must become stronger by training against weaker monsters, gaining levels and better equipment along the way!
+
+You may each day choose three places to visit : one in the morning, one in the afternoon and one in the evening. After that, you will rest at the inn, and the next day will begin.
+
+Do your best to beat the Dragon as quickly as possible. Start by training in the sewers, then go sell your loot at the blacksmith and buy some better gear. Good Luck!
+
+
 #choose #skipChoice
 + [Validate choices]
 
