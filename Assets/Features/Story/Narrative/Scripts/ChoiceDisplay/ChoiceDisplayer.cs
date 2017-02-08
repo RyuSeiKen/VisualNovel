@@ -20,19 +20,20 @@ namespace Feature.Narrative
         /// </summary>
         /// <param name="choice">The choice to be displayed.</param>
         /// <param name="handler">The handler to call when this choice is selected.</param>
-        public void DisplayChoice(Choice choice, OnChooseChoiceHandler handler) {
+        public void DisplayChoice(Choice choice, OnChooseChoiceHandler handler)
+        {
             gameObject.SetActive(true);
             GameObject choiceGo = Instantiate(choicePrefab);
-			choiceGo.name = choice.text;
-			choiceGo.transform.SetParent(choiceContainer);
-			Button button = choiceGo.GetComponentInChildren<Button>();
-			Text buttonText = choiceGo.GetComponentInChildren<Text>();
-			buttonText.text = choice.text;
-			button.onClick.AddListener(delegate 
-				{
-					handler(choice);
-					ClearChoices();
-				});
+            choiceGo.name = choice.text;
+            choiceGo.transform.SetParent(choiceContainer);
+            Button button = choiceGo.GetComponentInChildren<Button>();
+            Text buttonText = choiceGo.GetComponentInChildren<Text>();
+            buttonText.text = choice.text;
+            button.onClick.AddListener(delegate
+                {
+                    handler(choice);
+                    ClearChoices();
+                });
         }
 
         /// <summary>

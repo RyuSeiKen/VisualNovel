@@ -8,6 +8,7 @@ You stoped studying math.
 ->->
 ->DONE
 
+
 = physics
 You started studying physics.
 You continued studying physics.
@@ -30,3 +31,5 @@ You though of taking {~a break|a small nap|a cup of tee|some snaks}.
 + [Dont]
 -
 ->->
+
+

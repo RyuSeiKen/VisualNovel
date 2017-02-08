@@ -109,8 +109,10 @@ namespace Feature.Narrative {
         /// </summary>
         private void Update() {
 
+            // If the player use the left click or is holding the skip key,
             if (Input.GetMouseButtonDown(0) || Input.GetKey(KeyCode.LeftControl)) {
 
+                // Then, continue the story
                 Continue();
 
             }
@@ -228,7 +230,7 @@ namespace Feature.Narrative {
         }
 
         /// <summary>
-        /// Called whenever a tag is detected on a 
+        /// Called whenever a tag is detected, parse it.
         /// </summary>
         /// <param name="tag"></param>
         public TagHandingOutput HandleTag(string tag) {
