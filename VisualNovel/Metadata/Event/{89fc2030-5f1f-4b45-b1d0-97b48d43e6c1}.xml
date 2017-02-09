@@ -5,7 +5,7 @@
             <value>Church</value>
         </property>
         <property name="outputFormat">
-            <value>2</value>
+            <value>1</value>
         </property>
         <relationship name="mixer">
             <destination>{6e1fe026-8cbb-442a-8588-3c7d0badac98}</destination>
@@ -133,7 +133,6 @@
     <object class="MixerBusEffectChain" id="{0c537bb2-59e2-4411-8304-066141a00df0}">
         <relationship name="effects">
             <destination>{3f079d18-92a3-46e4-b3c9-051fe52b75ae}</destination>
-            <destination>{d4535f20-95e7-4714-8e94-b2fcaf676f2a}</destination>
         </relationship>
     </object>
     <object class="MixerBusPanner" id="{54c77609-33fb-4787-8fc0-2c55aa6d159f}"/>
@@ -145,6 +144,5 @@
     </object>
     <object class="MixerBusPanner" id="{865392a2-17e3-4f3c-b0f2-95e09f490c84}"/>
     <object class="MixerBusFader" id="{3f079d18-92a3-46e4-b3c9-051fe52b75ae}"/>
-    <object class="SpatialiserEffect" id="{d4535f20-95e7-4714-8e94-b2fcaf676f2a}"/>
     <object class="MixerBusFader" id="{aee5710c-107f-4a82-8eb6-b8c46f8fad62}"/>
 </objects>

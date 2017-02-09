@@ -5,7 +5,7 @@
             <value>Sewers</value>
         </property>
         <property name="outputFormat">
-            <value>2</value>
+            <value>1</value>
         </property>
         <relationship name="mixer">
             <destination>{826b0629-10e3-4c26-a7d6-e23c3df4b400}</destination>
@@ -133,7 +133,6 @@
     <object class="MixerBusEffectChain" id="{95e659e0-c33e-411c-a4bf-58c70549d795}">
         <relationship name="effects">
             <destination>{49520859-44a7-46ce-a574-7c74815e788d}</destination>
-            <destination>{cd3b559c-4dd7-49b8-9a5e-1d675ccae095}</destination>
         </relationship>
     </object>
     <object class="MixerBusPanner" id="{e0f3a179-515e-4a37-9d63-cd5181d0a95d}"/>
@@ -145,6 +144,5 @@
     </object>
     <object class="MixerBusPanner" id="{4ae02514-4407-42f6-86ec-691e47916e38}"/>
     <object class="MixerBusFader" id="{49520859-44a7-46ce-a574-7c74815e788d}"/>
-    <object class="SpatialiserEffect" id="{cd3b559c-4dd7-49b8-9a5e-1d675ccae095}"/>
     <object class="MixerBusFader" id="{afc26625-2c72-4fbb-99b6-06e482fba756}"/>
 </objects>

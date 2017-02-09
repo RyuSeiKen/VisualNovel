@@ -5,7 +5,7 @@
             <value>Forest</value>
         </property>
         <property name="outputFormat">
-            <value>2</value>
+            <value>1</value>
         </property>
         <relationship name="mixer">
             <destination>{772411be-52bb-4936-831c-656977948579}</destination>
@@ -133,7 +133,6 @@
     <object class="MixerBusEffectChain" id="{e93b773e-b86d-4c5f-b3a3-03c87e3fe84d}">
         <relationship name="effects">
             <destination>{8147a9d6-ff57-4f66-a167-e172c85c0050}</destination>
-            <destination>{f0df26f6-401a-4084-b632-455ead367e42}</destination>
         </relationship>
     </object>
     <object class="MixerBusPanner" id="{8beb78fa-0978-41f2-9f25-c304383e5eb1}"/>
@@ -145,6 +144,5 @@
     </object>
     <object class="MixerBusPanner" id="{a7c50cb3-8e30-4d97-91f5-32681bcd5627}"/>
     <object class="MixerBusFader" id="{8147a9d6-ff57-4f66-a167-e172c85c0050}"/>
-    <object class="SpatialiserEffect" id="{f0df26f6-401a-4084-b632-455ead367e42}"/>
     <object class="MixerBusFader" id="{49a1d357-f453-4792-be2b-ebaaf89befe2}"/>
 </objects>

@@ -5,7 +5,7 @@
             <value>Victory boss</value>
         </property>
         <property name="outputFormat">
-            <value>2</value>
+            <value>1</value>
         </property>
         <relationship name="mixer">
             <destination>{dbff47c4-11da-4a81-a0d1-6ca31961800c}</destination>
@@ -116,7 +116,6 @@
     <object class="MixerBusEffectChain" id="{3cc20ff5-f8f9-463b-b19a-78bd2d2af025}">
         <relationship name="effects">
             <destination>{39731bfb-3033-4aea-851c-db04c37498bf}</destination>
-            <destination>{89e02c54-4cd9-42cd-84f4-d1ab3c512034}</destination>
         </relationship>
     </object>
     <object class="MixerBusPanner" id="{6bb0ed84-eb40-49de-ada3-b4e8775444ec}"/>
@@ -128,6 +127,5 @@
     </object>
     <object class="MixerBusPanner" id="{59e0846d-4b3c-43fd-af3e-09c78248bf97}"/>
     <object class="MixerBusFader" id="{39731bfb-3033-4aea-851c-db04c37498bf}"/>
-    <object class="SpatialiserEffect" id="{89e02c54-4cd9-42cd-84f4-d1ab3c512034}"/>
     <object class="MixerBusFader" id="{e698630a-deda-405e-bf24-987abcc4366c}"/>
 </objects>

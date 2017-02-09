@@ -5,7 +5,7 @@
             <value>Quest Accepted</value>
         </property>
         <property name="outputFormat">
-            <value>2</value>
+            <value>1</value>
         </property>
         <relationship name="mixer">
             <destination>{54af79d6-f40a-43e4-8aee-33c5c00af47d}</destination>
@@ -116,7 +116,6 @@
     <object class="MixerBusEffectChain" id="{4854bc39-a725-47b0-88f3-6848735f79b0}">
         <relationship name="effects">
             <destination>{bb23f47b-cdf1-43ec-8f21-2797eba11ab6}</destination>
-            <destination>{5015827c-3a70-48ee-a7d8-e5fd66767bf7}</destination>
         </relationship>
     </object>
     <object class="MixerBusPanner" id="{f0515851-1f82-4ca9-a617-dd2fddf54673}"/>
@@ -128,6 +127,5 @@
     </object>
     <object class="MixerBusPanner" id="{93d83ab1-1460-46ad-9181-8ef34a00dcb1}"/>
     <object class="MixerBusFader" id="{bb23f47b-cdf1-43ec-8f21-2797eba11ab6}"/>
-    <object class="SpatialiserEffect" id="{5015827c-3a70-48ee-a7d8-e5fd66767bf7}"/>
     <object class="MixerBusFader" id="{af564fe8-b86f-4465-9931-5f942d1b3101}"/>
 </objects>

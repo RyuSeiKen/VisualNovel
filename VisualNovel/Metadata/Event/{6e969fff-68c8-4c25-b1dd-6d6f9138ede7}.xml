@@ -5,7 +5,7 @@
             <value>Tavern</value>
         </property>
         <property name="outputFormat">
-            <value>2</value>
+            <value>1</value>
         </property>
         <relationship name="mixer">
             <destination>{4b364884-745d-4713-8b69-54650ce759e9}</destination>
@@ -133,7 +133,6 @@
     <object class="MixerBusEffectChain" id="{6ed961b7-34a5-4450-b63b-11094dc9b4c5}">
         <relationship name="effects">
             <destination>{c9df6f3b-ade1-4b40-b598-536b4cba6647}</destination>
-            <destination>{26c6467e-c073-48a6-a891-5d59c7470999}</destination>
         </relationship>
     </object>
     <object class="MixerBusPanner" id="{bd843e3d-a4f9-4ff8-a5ef-f5097d77c33e}"/>
@@ -145,6 +144,5 @@
     </object>
     <object class="MixerBusPanner" id="{98f63270-61ee-4476-9562-c4747f78079e}"/>
     <object class="MixerBusFader" id="{c9df6f3b-ade1-4b40-b598-536b4cba6647}"/>
-    <object class="SpatialiserEffect" id="{26c6467e-c073-48a6-a891-5d59c7470999}"/>
     <object class="MixerBusFader" id="{dcf9ddcd-33f0-4e4f-a657-8ec5a2b31247}"/>
 </objects>

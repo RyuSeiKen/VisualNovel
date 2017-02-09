@@ -5,7 +5,7 @@
             <value>Desert</value>
         </property>
         <property name="outputFormat">
-            <value>2</value>
+            <value>1</value>
         </property>
         <relationship name="mixer">
             <destination>{1472fcee-88db-4c69-a9e4-87afaef1185c}</destination>
@@ -133,7 +133,6 @@
     <object class="MixerBusEffectChain" id="{b56ba796-7f70-4690-a6b1-5cbe9fe51311}">
         <relationship name="effects">
             <destination>{c6c50ecf-767b-4074-99da-77baa13f6eb2}</destination>
-            <destination>{5581a5e3-c278-456b-9c6c-d6c4abbbe268}</destination>
         </relationship>
     </object>
     <object class="MixerBusPanner" id="{bacaaa15-d4b8-44e2-a0f8-47f5dfd9c052}"/>
@@ -145,6 +144,5 @@
     </object>
     <object class="MixerBusPanner" id="{a4d885a4-67ed-4327-98c3-03bc0fe0aac6}"/>
     <object class="MixerBusFader" id="{c6c50ecf-767b-4074-99da-77baa13f6eb2}"/>
-    <object class="SpatialiserEffect" id="{5581a5e3-c278-456b-9c6c-d6c4abbbe268}"/>
     <object class="MixerBusFader" id="{8e73fae4-19fb-4690-9977-1bb8b0dde697}"/>
 </objects>

@@ -5,7 +5,7 @@
             <value>Battle dragon</value>
         </property>
         <property name="outputFormat">
-            <value>2</value>
+            <value>1</value>
         </property>
         <relationship name="mixer">
             <destination>{0df52e97-2861-4ebc-90ee-c8e35fb4eac0}</destination>
@@ -133,7 +133,6 @@
     <object class="MixerBusEffectChain" id="{1ca05f6c-d108-41e3-86f8-f23a2a699d3a}">
         <relationship name="effects">
             <destination>{897c5ea5-17db-449c-b313-99465603bf3d}</destination>
-            <destination>{9285d4ed-34dc-4352-88dc-f2c0e122b345}</destination>
         </relationship>
     </object>
     <object class="MixerBusPanner" id="{6167413c-490f-4ef2-9922-9efbc5c6281a}"/>
@@ -145,6 +144,5 @@
     </object>
     <object class="MixerBusPanner" id="{4c5d6b99-dab8-467a-a6d4-1fe430a211d9}"/>
     <object class="MixerBusFader" id="{897c5ea5-17db-449c-b313-99465603bf3d}"/>
-    <object class="SpatialiserEffect" id="{9285d4ed-34dc-4352-88dc-f2c0e122b345}"/>
     <object class="MixerBusFader" id="{ea172b12-ad47-447e-90a1-522bba557aea}"/>
 </objects>

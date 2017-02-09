@@ -5,7 +5,7 @@
             <value>Victory normal</value>
         </property>
         <property name="outputFormat">
-            <value>2</value>
+            <value>1</value>
         </property>
         <relationship name="mixer">
             <destination>{823702ad-536a-4a27-9bae-e884c0b674fa}</destination>
@@ -116,7 +116,6 @@
     <object class="MixerBusEffectChain" id="{17124ce7-0a33-401d-b2d7-3076022d2fce}">
         <relationship name="effects">
             <destination>{fc11142c-fe96-413a-8291-0c77307b43cc}</destination>
-            <destination>{edd7358f-d7f1-452b-a46c-a90af3140d4b}</destination>
         </relationship>
     </object>
     <object class="MixerBusPanner" id="{ec5dd8a5-258e-4e1a-b277-313c7d67c4b3}"/>
@@ -128,6 +127,5 @@
     </object>
     <object class="MixerBusPanner" id="{5f2b5516-1ad7-439c-9b11-3a1a222b8499}"/>
     <object class="MixerBusFader" id="{fc11142c-fe96-413a-8291-0c77307b43cc}"/>
-    <object class="SpatialiserEffect" id="{edd7358f-d7f1-452b-a46c-a90af3140d4b}"/>
     <object class="MixerBusFader" id="{1c801aa6-4a72-43ee-93ee-783902c2c7f1}"/>
 </objects>

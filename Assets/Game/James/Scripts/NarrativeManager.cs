@@ -178,11 +178,11 @@ namespace James {
                 if ((tagHandingOutput & TagHandingOutput.SKIP_CHOICE) == 0) {
                     if (story.currentChoices.Count > 0) {
 
-                        narrativeDisplays.choice.ClearChoices();
-                        foreach (Choice choice in story.currentChoices) {
-
+                        //narrativeDisplays.choice.ClearChoices();
+                        
+						foreach (Choice choice in story.currentChoices)
+						{
                             narrativeDisplays.choice.DisplayChoice(choice, HandleRegualrChoiceChosed);
-
                         }
 
                     }
@@ -222,9 +222,9 @@ namespace James {
         /// Describe all effect a tag can have on the narrative Continue() method.
         /// </summary>
         public enum TagHandingOutput {
-            NONE,
-            SKIP_TEXT_DISPLAY,
-            SKIP_CHOICE
+            NONE 				= 0,
+            SKIP_TEXT_DISPLAY 	= 1,
+            SKIP_CHOICE 		= 2
         }
 
         /// <summary>
@@ -235,24 +235,53 @@ namespace James {
 
             TagHandingOutput output = TagHandingOutput.NONE;
 
-            switch (tag) {
-                case "choose":
-                    HandleDailyChoices();
-                    break;
-                case "skipText":
-                    output |= TagHandingOutput.SKIP_TEXT_DISPLAY;
-                    break;
-                case "skipChoice":
-                    output |= TagHandingOutput.SKIP_CHOICE;
-                    break;
-                default:
-                    Debug.Log(string.Format("Tag : \"#{0}\" not handled.", tag));
-                    break;
+			string firstTagWord = tag.Split(' ')[0];
+			switch (firstTagWord) {
+            case "choose":
+                HandleDailyChoices();
+                break;
+            case "skipText":
+			output |= TagHandingOutput.SKIP_TEXT_DISPLAY;
+                break;
+            case "skipChoice":
+                output |= TagHandingOutput.SKIP_CHOICE;
+                break;
+			case "musicSwitch":
+				string musicName = tag.Replace("musicSwitch ", "");
+				if(eSwitchMusic != null)
+				{
+					eSwitchMusic(musicName);
+				}
+				break;
+			case "monsterSwitch":
+				string monsterName = (string) story.variablesState ["CURRENTENEMYNAME"];
+				if(eSwitchMonster != null)
+				{
+					eSwitchMonster(monsterName);
+				}
+				break;
+			case "killMonster":
+				if(eKillMonster != null)
+				{
+					eKillMonster();
+				}
+				break;
+            default:
+                Debug.Log(string.Format("Tag : \"#{0}\" not handled.", tag));
+                break;
             }
+
+			//Check if music.
+
+
 
             return output;
 
         }
+
+		public static System.Action<string> eSwitchMusic;
+		public static System.Action<string> eSwitchMonster;
+		public static System.Action eKillMonster;
 
         /*************************
          * CUSTOM EVENT HANDLERS *

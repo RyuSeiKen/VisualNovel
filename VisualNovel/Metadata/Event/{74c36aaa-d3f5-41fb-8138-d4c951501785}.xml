@@ -5,7 +5,7 @@
             <value>Blacksmith</value>
         </property>
         <property name="outputFormat">
-            <value>2</value>
+            <value>1</value>
         </property>
         <relationship name="mixer">
             <destination>{d4bbb304-ef2d-4cd8-ac5c-fd58b2d8e771}</destination>
@@ -133,7 +133,6 @@
     <object class="MixerBusEffectChain" id="{919193df-a5e7-4176-8b02-1d00ccdd018f}">
         <relationship name="effects">
             <destination>{5235c599-2367-40e6-a32a-e021aa235a69}</destination>
-            <destination>{01690a2f-94e3-4fb3-ad17-45b8d1b871e4}</destination>
         </relationship>
     </object>
     <object class="MixerBusPanner" id="{5d589ea1-0fae-41c7-95e0-7b38a7e6950f}"/>
@@ -145,6 +144,5 @@
     </object>
     <object class="MixerBusPanner" id="{b40e55a2-ad0c-4786-ba76-27074e6f33c0}"/>
     <object class="MixerBusFader" id="{5235c599-2367-40e6-a32a-e021aa235a69}"/>
-    <object class="SpatialiserEffect" id="{01690a2f-94e3-4fb3-ad17-45b8d1b871e4}"/>
     <object class="MixerBusFader" id="{2f7e1be8-cc2a-4b4b-9218-9978e8a38dc7}"/>
 </objects>

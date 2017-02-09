@@ -5,7 +5,7 @@
             <value>Battle boss</value>
         </property>
         <property name="outputFormat">
-            <value>2</value>
+            <value>1</value>
         </property>
         <relationship name="mixer">
             <destination>{fcd9f627-a428-4636-9b79-d27b85a2d3b5}</destination>
@@ -133,7 +133,6 @@
     <object class="MixerBusEffectChain" id="{f9019f14-7f36-4655-b931-796b4da7872a}">
         <relationship name="effects">
             <destination>{b6ca24a7-f2cc-40bb-b0d9-4867da72d759}</destination>
-            <destination>{f28231cc-5fde-4495-8474-2fe38882f6e8}</destination>
         </relationship>
     </object>
     <object class="MixerBusPanner" id="{59ac4101-c340-4d7e-b741-6185850496a6}"/>
@@ -145,6 +144,5 @@
     </object>
     <object class="MixerBusPanner" id="{c8cccaa5-ab3b-4517-aea6-36db51b9fab2}"/>
     <object class="MixerBusFader" id="{b6ca24a7-f2cc-40bb-b0d9-4867da72d759}"/>
-    <object class="SpatialiserEffect" id="{f28231cc-5fde-4495-8474-2fe38882f6e8}"/>
     <object class="MixerBusFader" id="{92ffdaf3-afd8-416b-908e-1e2decf9e3f0}"/>
 </objects>

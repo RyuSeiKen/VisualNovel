@@ -5,7 +5,7 @@
             <value>Volcano</value>
         </property>
         <property name="outputFormat">
-            <value>2</value>
+            <value>1</value>
         </property>
         <relationship name="mixer">
             <destination>{d155c2bc-ad52-4b1a-8390-6ab1da0ccb51}</destination>
@@ -133,7 +133,6 @@
     <object class="MixerBusEffectChain" id="{c70bd201-4de7-4413-9227-43da25916472}">
         <relationship name="effects">
             <destination>{7991a911-259c-44a4-aa7f-5606b69aa469}</destination>
-            <destination>{b9bb0cb2-2b9d-4e92-97ba-0dca04f41f07}</destination>
         </relationship>
     </object>
     <object class="MixerBusPanner" id="{da019c2d-1522-49ae-935f-63531997a251}"/>
@@ -145,6 +144,5 @@
     </object>
     <object class="MixerBusPanner" id="{d12173df-097e-4daf-b56a-da0aaf4ed13b}"/>
     <object class="MixerBusFader" id="{7991a911-259c-44a4-aa7f-5606b69aa469}"/>
-    <object class="SpatialiserEffect" id="{b9bb0cb2-2b9d-4e92-97ba-0dca04f41f07}"/>
     <object class="MixerBusFader" id="{6b632ef3-e5aa-41d6-bd97-34ab1ae52e56}"/>
 </objects>

@@ -5,7 +5,7 @@
             <value>Victory dragon</value>
         </property>
         <property name="outputFormat">
-            <value>2</value>
+            <value>1</value>
         </property>
         <relationship name="mixer">
             <destination>{62d490b3-6593-43a7-8535-cce9c9d2bf0b}</destination>
@@ -116,7 +116,6 @@
     <object class="MixerBusEffectChain" id="{bda39e63-3e62-4e6a-9b9f-a12f99da25b4}">
         <relationship name="effects">
             <destination>{97e62f01-0b92-4145-9359-720d043aacfb}</destination>
-            <destination>{d962b6a0-3264-4433-9697-68716d54cce1}</destination>
         </relationship>
     </object>
     <object class="MixerBusPanner" id="{660939d3-ed0f-4884-b0d2-ba30f387a14f}"/>
@@ -128,6 +127,5 @@
     </object>
     <object class="MixerBusPanner" id="{923e0c32-62a0-4dc3-9eec-d6b92fd76873}"/>
     <object class="MixerBusFader" id="{97e62f01-0b92-4145-9359-720d043aacfb}"/>
-    <object class="SpatialiserEffect" id="{d962b6a0-3264-4433-9697-68716d54cce1}"/>
     <object class="MixerBusFader" id="{0193255b-2aee-4b7d-bd72-67de36b23d74}"/>
 </objects>
