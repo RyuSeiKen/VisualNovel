@@ -32,7 +32,7 @@ public class BasicInkExample : MonoBehaviour {
 		RemoveChildren ();
 
 		while (story.canContinue) {
-			string text = story.Continue ().Trim();
+			string text = story.Continue().Trim();
 			CreateContentView(text);
 		}
 
@@ -57,7 +57,8 @@ public class BasicInkExample : MonoBehaviour {
 		RefreshView();
 	}
 
-	void CreateContentView (string text) {
+	void CreateContentView (string text) 
+	{
 		Text storyText = Instantiate (textPrefab) as Text;
 		storyText.text = text;
 		storyText.transform.SetParent (canvas.transform, false);

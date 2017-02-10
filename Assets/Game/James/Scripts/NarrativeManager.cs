@@ -141,10 +141,9 @@ namespace James {
         public void Continue() {
 
             // Compleatly display text if was in the process of displaying it
-            if (!narrativeDisplays.text.HasAnimationReachedLastCharacter()) {
-
+            if (!narrativeDisplays.text.HasAnimationReachedLastCharacter()) 
+			{
                 narrativeDisplays.text.DisplayAllTextNow();
-
             }
             else
             // Continue storry
@@ -253,11 +252,25 @@ namespace James {
 					eSwitchMusic(musicName);
 				}
 				break;
+			case "playEffect":
+				string effectName = tag.Replace("playEffect ", "");
+				if(ePlayEffect != null)
+				{
+					ePlayEffect(effectName);
+				}
+				break;
 			case "monsterSwitch":
 				string monsterName = (string) story.variablesState ["CURRENTENEMYNAME"];
 				if(eSwitchMonster != null)
 				{
 					eSwitchMonster(monsterName);
+				}
+				break;
+			case "placeSwitch":
+				string placeName = tag.Replace("placeSwitch ", "");
+				if(eSwitchPlace != null)
+				{
+					eSwitchPlace(placeName);
 				}
 				break;
 			case "killMonster":
@@ -270,17 +283,15 @@ namespace James {
                 Debug.Log(string.Format("Tag : \"#{0}\" not handled.", tag));
                 break;
             }
-
-			//Check if music.
-
-
-
             return output;
 
         }
 
 		public static System.Action<string> eSwitchMusic;
+		public static System.Action<string> ePlayEffect;
 		public static System.Action<string> eSwitchMonster;
+		public static System.Action<string> eSwitchPlace;
+
 		public static System.Action eKillMonster;
 
         /*************************

@@ -60,7 +60,7 @@
     <object class="MarkerTrack" id="{3747c6de-beb8-4bbc-a7a7-6c736ea24994}"/>
     <object class="GroupTrack" id="{5306b4b0-0f29-4add-a0e7-937ef31a8a6b}">
         <relationship name="modules">
-            <destination>{c83170c2-03b7-487b-bb02-63c64f6d3519}</destination>
+            <destination>{e2f45b87-9e18-49ad-92ec-2ea9fbc4e5dd}</destination>
         </relationship>
         <relationship name="mixerGroup">
             <destination>{6806661d-96b4-4e90-99b0-4554b2615971}</destination>
@@ -68,7 +68,7 @@
     </object>
     <object class="Timeline" id="{03bac480-0f74-4165-915f-56e43486dd97}">
         <relationship name="modules">
-            <destination>{c83170c2-03b7-487b-bb02-63c64f6d3519}</destination>
+            <destination>{e2f45b87-9e18-49ad-92ec-2ea9fbc4e5dd}</destination>
         </relationship>
         <relationship name="markers">
             <destination>{097d6de9-40f4-4d7e-972d-3df9540b50ac}</destination>
@@ -91,15 +91,15 @@
         </relationship>
     </object>
     <object class="MixerBusPanner" id="{801c0f74-f138-404b-80eb-5475637238bf}"/>
-    <object class="SingleSound" id="{c83170c2-03b7-487b-bb02-63c64f6d3519}">
+    <object class="SingleSound" id="{e2f45b87-9e18-49ad-92ec-2ea9fbc4e5dd}">
         <property name="start">
             <value>0</value>
         </property>
         <property name="length">
-            <value>72.071836734693875</value>
+            <value>79.072653061224486</value>
         </property>
         <relationship name="audioFile">
-            <destination>{a6f7da5a-8b04-446f-8f44-8f7fcf0fb370}</destination>
+            <destination>{1cfccddb-6e0a-4071-b28b-bb0b2b94d157}</destination>
         </relationship>
     </object>
     <object class="EventMixerGroup" id="{6806661d-96b4-4e90-99b0-4554b2615971}">
@@ -121,7 +121,7 @@
             <value>0</value>
         </property>
         <property name="length">
-            <value>72.071836734693875</value>
+            <value>79.072653061224486</value>
         </property>
         <relationship name="timeline">
             <destination>{03bac480-0f74-4165-915f-56e43486dd97}</destination>
